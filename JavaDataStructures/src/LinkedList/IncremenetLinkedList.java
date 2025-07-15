@@ -21,16 +21,19 @@ public class IncremenetLinkedList {
 	public static Node<Integer> TakeLinkedListInput(){
 		Scanner s = new Scanner(System.in);
 		int n = s.nextInt();
-		Node<Integer> head = new Node<Integer>(n);
-		Node<Integer> tail = head;
+		Node<Integer> head = null;
+		Node<Integer> tail = null;
 		while(n!=-1) {
-			n=s.nextInt();
-			if(n==-1) {
-				break;
+			if(head==null) {
+				head=new Node<Integer>(n);
+				tail=head;
+			}else {
+				Node<Integer> node= new Node<Integer>(n);
+				tail.next=node;
+				tail=node;
 			}
-			Node<Integer> node= new Node<Integer>(n);
-			tail.next=node;
-			tail=node;
+			n=s.nextInt();
+			
 		}
 		return head;
 	}
