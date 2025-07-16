@@ -24,6 +24,17 @@ public class PalindromeLinkedList {
 		return head;
 	}
 	
+	public static int length(Node head){
+        //Your code goes here
+		int length=0;
+		Node<Integer> temp=head;
+		while(temp!=null) {
+			length++;
+			temp=temp.next;
+		}
+		return length;
+    }
+	
 	public static Node<Integer> Reverse(Node<Integer> root) {
 		//Your code goes here
 		if(root==null || root.next==null) {
@@ -34,25 +45,32 @@ public class PalindromeLinkedList {
 		root.next=null;
 		return head;
 	}
-//	public static boolean isPalindrome(Node<Integer> head) {
-//		//Your code goes here
-//		if(head==null || head.next==null) {
-//			return true;
-//		}
-//		Node<Integer> reverse = Reverse(head);
-//		Node<Integer> tail1 = head;
-//		Node<Integer> tail2 = reverse;
-//		while(tail1!=null && tail2!=null) {
-//			if(tail1.data!=tail2.data) {
-//				return false;
-//			}
-//			tail1=tail1.next;
-//			tail2=tail2.next;
-//		}
-//		return true;
-//	}
+	public static boolean isPalindrome(Node<Integer> head) {
+		//Your code goes here
+		if(head==null || head.next==null) {
+			return true;
+		}
+		int length = length(head);
+		Node<Integer> tail1 = head;
+		Node<Integer> tail2 = head.next;
+		for(int i=0;i<(length/2)-1;i++) {
+			tail1=tail1.next;
+			tail2=tail1.next;
+		}
+		tail1.next=null;
+		Node<Integer> reverse = Reverse(tail2);
+		while(head!=null && reverse!=null) {
+			if(head.data!=reverse.data) {
+				return false;
+			}
+			head=head.next;
+			reverse=reverse.next;
+		}
+		return true;
+		
+	}
 	public static void main(String[] args) {
 		Node<Integer> head = TakeLinkedListInput();
-		//System.out.println(isPalindrome(head));
+		System.out.println(isPalindrome(head));
 	}
 }
