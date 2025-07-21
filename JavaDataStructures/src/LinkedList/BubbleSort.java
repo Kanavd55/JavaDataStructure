@@ -47,20 +47,28 @@ public class BubbleSort {
 		}
 		for(int i=0;i<count;i++) {
 			tail=head;
+			Node<Integer> prev=null;
 			while(tail.next!=null) {
 				Node<Integer> temp=tail.next;
-				System.out.println("tempdata"+temp.data);
 				if(tail.data > temp.data) {
 					if(tail==head) {
 						tail.next=temp.next;
 						temp.next=tail;
 						head=temp;
+						prev=head;
 					}else {
 						tail.next=temp.next;
 						temp.next=tail;
+						prev.next=temp;
+						prev=prev.next;
 					}
 				}else {
 					tail=tail.next;
+					if(prev!=null) {
+						prev=prev.next;
+					}else {
+						prev=head;
+					}
 				}
 			}
 		}
