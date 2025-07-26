@@ -1,7 +1,8 @@
 package BinaryTreeDataStructure;
+
 import java.util.Scanner;
-public class BinaryTreeUse {
-	
+
+public class SumOfNodes {
 	public static void PrintBinaryTreeRecursively(BinaryTreeNode<Integer> root) {
 		if(root==null) {
 			return;
@@ -9,36 +10,6 @@ public class BinaryTreeUse {
 		System.out.println(root.data);
 		PrintBinaryTreeRecursively(root.left);
 		PrintBinaryTreeRecursively(root.right);
-	}
-	
-	public static void PrintTreeDetailed(BinaryTreeNode<Integer> root) {
-		if(root==null) {
-			return;
-		}
-		System.out.print(root.data+":");
-		if(root.left!=null) {
-			System.out.print("L"+root.left.data+" ");
-		}
-		if(root.right!=null) {
-			System.out.print("R"+root.right.data+" ");
-		}
-		System.out.println();
-		PrintTreeDetailed(root.left);
-		PrintTreeDetailed(root.right);
-	}
-	
-	public static BinaryTreeNode<Integer> TakeTreeinput(){
-		Scanner s = new Scanner(System.in);
-		int rootData = s.nextInt();
-		if(rootData==-1) {
-			return null;
-		}
-		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
-		BinaryTreeNode<Integer> leftChild = TakeTreeinput();
-		BinaryTreeNode<Integer> rightChild = TakeTreeinput();
-		root.left=leftChild;
-		root.right=rightChild;
-		return root;
 	}
 	
 	public static BinaryTreeNode<Integer> TakeTreeInputBetter(boolean isRoot,int parentData,boolean isLeft){
@@ -65,9 +36,20 @@ public class BinaryTreeUse {
 		return root;
 	}
 	
+	public static int getSum(BinaryTreeNode<Integer> root) {
+		//Your code goes here.
+		if(root==null){
+			return 0;
+		}
+		if(root.left==null && root.right == null){
+			return root.data;
+		}
+		int leftSum = getSum(root.left);
+		int rightSum = getSum(root.right);
+		return root.data+leftSum+rightSum;
+	}
 	public static void main(String[] args) {
 		BinaryTreeNode<Integer> root = TakeTreeInputBetter(true,0,true);
-		PrintBinaryTreeRecursively(root);
-		PrintTreeDetailed(root);
+		System.out.println(getSum(root));
 	}
 }
