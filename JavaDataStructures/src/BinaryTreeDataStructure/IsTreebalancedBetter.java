@@ -2,7 +2,7 @@ package BinaryTreeDataStructure;
 
 import java.util.Scanner;
 
-public class CheckIfTreeIsBalanced {
+public class IsTreebalancedBetter {
 	public static BinaryTreeNode<Integer> TakeTreeInputBetter(boolean isRoot,int parentData,boolean isLeft){
 		if(isRoot) {
 			System.out.println("Enter the root data");
@@ -35,32 +35,33 @@ public class CheckIfTreeIsBalanced {
 		PrintBinaryTreeRecursively(root.right);
 	}
 	
-	public static int height(BinaryTreeNode<Integer> root) {
-		//Your code goes here
-		if(root==null){
-			return 0;
-		}
-		int leftHeight = height(root.left);
-		int rightHeight = height(root.right);
-		int maxChildHeight = Math.max(leftHeight,rightHeight);
-		return 1+maxChildHeight;
-	}
-	
-	public static boolean isBalanced(BinaryTreeNode<Integer> root) {
+	public static BinaryTreeNodeBetter isTreeBalancedImproved(BinaryTreeNode<Integer> root) {
 		if(root==null) {
-			return true;
+			BinaryTreeNodeBetter Node = new BinaryTreeNodeBetter();
+			Node.height=0;
+			Node.isBalanced=true;
+			return Node;
 		}
-		int leftHeight=height(root.left);
-		int rightHeight=height(root.right);
-		if(leftHeight != rightHeight) {
-			return false;
+		BinaryTreeNodeBetter leftChild = isTreeBalancedImproved(root.left);
+		BinaryTreeNodeBetter rightChild = isTreeBalancedImproved(root.right);
+		int height = 1 + Math.max(leftChild.height,rightChild.height);
+		boolean isBalanced = true;
+		if(leftChild.height!=rightChild.height) {
+			isBalanced=false;
 		}
-		return isBalanced(root.left) && isBalanced(root.right);
+		if(!leftChild.isBalanced || !rightChild.isBalanced) {
+			isBalanced=false;
+		}
+		BinaryTreeNodeBetter rootNode = new BinaryTreeNodeBetter();
+		rootNode.height=height;
+		rootNode.isBalanced=isBalanced;
+		return rootNode;
 	}
 	
 	public static void main(String[] args) {
 		BinaryTreeNode<Integer> root = TakeTreeInputBetter(true,0,true);
-		System.out.println(isBalanced(root));
+		BinaryTreeNodeBetter rootNode = isTreeBalancedImproved(root);
+		System.out.println(rootNode.isBalanced);
 	}
 
 }
