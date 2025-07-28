@@ -2,7 +2,7 @@ package BinaryTreeDataStructure;
 
 import java.util.Scanner;
 
-public class RemoveLeafNodes {
+public class CheckIfTreeIsBalanced {
 	public static BinaryTreeNode<Integer> TakeTreeInputBetter(boolean isRoot,int parentData,boolean isLeft){
 		if(isRoot) {
 			System.out.println("Enter the root data");
@@ -34,20 +34,33 @@ public class RemoveLeafNodes {
 		PrintBinaryTreeRecursively(root.left);
 		PrintBinaryTreeRecursively(root.right);
 	}
-	public static BinaryTreeNode<Integer> removeLeafNodes(BinaryTreeNode<Integer> root){
-		if(root==null) {
-			return root;
+	
+	public static int height(BinaryTreeNode<Integer> root) {
+		//Your code goes here
+		if(root==null){
+			return 0;
 		}
-		if(root.left==null && root.right==null) {
-			return null;
-		}
-		removeLeafNodes(root.left);
-		removeLeafNodes(root.right);
-		return root;
+		int leftHeight = height(root.left);
+		int rightHeight = height(root.right);
+		int maxChildHeight = Math.max(leftHeight,rightHeight);
+		return 1+maxChildHeight;
 	}
+	
+	public static boolean isBalanced(BinaryTreeNode<Integer> root) {
+		if(root==null) {
+			return true;
+		}
+		int leftHeight=height(root.left);
+		int rightHeight=height(root.right);
+		if(leftHeight != rightHeight) {
+			return false;
+		}
+		return isBalanced(root.left) && isBalanced(root.right);
+	}
+	
 	public static void main(String[] args) {
 		BinaryTreeNode<Integer> root = TakeTreeInputBetter(true,0,true);
-		root=removeLeafNodes(root);
-		PrintBinaryTreeRecursively(root);
+		
 	}
+
 }
