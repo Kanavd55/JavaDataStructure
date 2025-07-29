@@ -42,7 +42,8 @@ public class DiameterOfBinaryTree {
 	}
 	public static int diameterOfBinaryTree(BinaryTreeNode<Integer> root){
 		//Your code goes here
-		return diameterOfBinaryTreeBetter(root).diameter;
+		DiameterHeightNode rootNode = diameterOfBinaryTreeBetter(root);
+		return rootNode.diameter;
 	}
 	public static void main(String[] args) {
 		BinaryTreeNode<Integer> root = TakeTreeInputBetter(true,0,true);
