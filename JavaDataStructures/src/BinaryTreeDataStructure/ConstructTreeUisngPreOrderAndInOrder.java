@@ -41,7 +41,7 @@ public class ConstructTreeUisngPreOrderAndInOrder {
 		int rootData = preOrder[siPre];
 		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
 		int rootIndex = -1;
-		for(int i=siIn;i<inOrder.length;i++) {
+		for(int i=siIn;i<=eiIn;i++) {
 			if(inOrder[i]==rootData) {
 				rootIndex=i;
 				break;
