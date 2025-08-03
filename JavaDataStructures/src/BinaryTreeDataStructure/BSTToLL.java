@@ -1,3 +1,19 @@
+//Problem statement
+//Given a BST, convert it into a sorted linked list. You have to return the head of LL.
+//
+//Detailed explanation ( Input/output format, Notes, Images )
+//Constraints:
+//Time Limit: 1 second
+//1<=n<=10^5
+//Note:
+//In case if you are facing any issue to solve this problem, please prefer to use the helper function.
+//Sample Input 1:
+//8 5 10 2 6 -1 -1 -1 -1 -1 7 -1 -1
+//
+//
+//Sample Output 1:
+//2 5 6 7 8 10
+
 package BinaryTreeDataStructure;
 
 import java.util.LinkedList;
