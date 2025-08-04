@@ -68,16 +68,22 @@ public class FindPathInBST {
 			return node;
 		}
 		PathAndIsPresent<Integer> ans = new PathAndIsPresent<>();
-		PathAndIsPresent<Integer> leftNode = getPathHelper(root.left,data);
-		PathAndIsPresent<Integer> rightNode = getPathHelper(root.right,data);
-		if(leftNode.isPresent) {
-			ans.Path=leftNode.Path;
-			ans.Path.add(root.data);
-			ans.isPresent=true;
-		}else if(rightNode.isPresent) {
-			ans.isPresent=true;
-			ans.Path=rightNode.Path;
-			ans.Path.add(root.data);
+		
+		if(data<root.data) {
+			PathAndIsPresent<Integer> leftNode = getPathHelper(root.left,data);
+			if(leftNode.isPresent) {
+				ans.Path=leftNode.Path;
+				ans.Path.add(root.data);
+				ans.isPresent=true;
+			}
+		}
+		if(data>=root.data) {
+			PathAndIsPresent<Integer> rightNode = getPathHelper(root.right,data);
+			if(rightNode.isPresent) {
+				ans.isPresent=true;
+				ans.Path=rightNode.Path;
+				ans.Path.add(root.data);
+			}
 		}
 		 return ans;
 	}
