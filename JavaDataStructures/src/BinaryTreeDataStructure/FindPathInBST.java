@@ -75,6 +75,7 @@ public class FindPathInBST {
 				ans.Path=leftNode.Path;
 				ans.Path.add(root.data);
 				ans.isPresent=true;
+				return ans;
 			}
 		}
 		if(data>=root.data) {
@@ -83,6 +84,7 @@ public class FindPathInBST {
 				ans.isPresent=true;
 				ans.Path=rightNode.Path;
 				ans.Path.add(root.data);
+				return ans;
 			}
 		}
 		 return ans;
