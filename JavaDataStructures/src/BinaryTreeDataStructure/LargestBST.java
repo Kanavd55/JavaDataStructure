@@ -67,7 +67,7 @@ public class LargestBST {
 		}
 		checkBSTAndHeight leftNode = largestBSTSubtreeHelper(root.left);
 		checkBSTAndHeight rightNode = largestBSTSubtreeHelper(root.right);
-		if(leftNode.checkBST && rightNode.checkBST && root.data>leftNode.max && root.data<rightNode.min) {
+		if(leftNode.BSTT && rightNode.BSTT && root.data>leftNode.max && root.data<rightNode.min) {
 			int height = Math.max(leftNode.height, rightNode.height)+1;
 			int max = Math.max(rightNode.max,root.data);
 			int min = Math.min(leftNode.min,root.data);
