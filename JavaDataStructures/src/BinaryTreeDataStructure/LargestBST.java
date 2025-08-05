@@ -62,45 +62,22 @@ public class LargestBST {
 	public static checkBSTAndHeight largestBSTSubtreeHelper(BinaryTreeNode<Integer> root) {
 		// Write your code here
 		if(root==null) {
-			checkBSTAndHeight node = new checkBSTAndHeight(0,true);
+			checkBSTAndHeight node = new checkBSTAndHeight(0,true,Integer.MIN_VALUE,Integer.MAX_VALUE);
 			return node;
 		}
 		checkBSTAndHeight leftNode = largestBSTSubtreeHelper(root.left);
 		checkBSTAndHeight rightNode = largestBSTSubtreeHelper(root.right);
-		checkBSTAndHeight ans = new checkBSTAndHeight(1,false);
-		if(leftNode.checkBST && !rightNode.checkBST) {
-			ans.height=leftNode.height;
-			ans.checkBST=true;
-			return ans;
-		}else if(!leftNode.checkBST && rightNode.checkBST) {
-			ans.height=rightNode.height;
-			ans.checkBST=true;
-			return ans;
-		}else if(leftNode.checkBST && rightNode.checkBST) {
-			ans.height=Math.max(leftNode.height, rightNode.height);
-			ans.checkBST=true;
-			if(root.left!=null && root.right!=null) {
-				if(root.data>root.left.data && root.data<root.right.data) {
-					ans.height=ans.height+1;
-					return ans;
-				}
-				return ans;
-				
-			}else if(root.left==null && root.right!=null) {
-				if(root.data<root.right.data) {
-					ans.height=ans.height+1;
-					return ans;
-				}
-				return ans;
-			}else if(root.left!=null && root.right==null) {
-				if(root.data>root.left.data) {
-					ans.height=ans.height+1;
-					return ans;
-				}
-				return ans;
-			}
+		if(leftNode.checkBST && rightNode.checkBST && root.data>leftNode.max && root.data<rightNode.min) {
+			int height = Math.max(leftNode.height, rightNode.height)+1;
+			int max = Math.max(rightNode.max,root.data);
+			int min = Math.min(leftNode.min,root.data);
+			checkBSTAndHeight node = new checkBSTAndHeight(height,true,max,min);
+			return node;
+		}else {
+			int height = Math.max(leftNode.height, rightNode.height);
+			checkBSTAndHeight node = new checkBSTAndHeight(height,false,Integer.MIN_VALUE,Integer.MAX_VALUE);
+			return node;
 		}
-		return ans;
 	}
 	
 	public static int largestBSTSubtree(BinaryTreeNode<Integer> root) {
