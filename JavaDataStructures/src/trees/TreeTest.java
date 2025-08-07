@@ -52,6 +52,29 @@ public class TreeTest {
 			}
 		}
 	}
+	
+	public static int numberOfNode(TreeNode<Integer> root) {
+		if(root==null) {
+			return 0;
+		}
+		int count = 1;
+		for(int i=0;i<root.children.size();i++) {
+			int childCount = numberOfNode(root.children.get(i));
+			count = count + childCount;
+		}
+		return count;
+	}
+	public static int sumOfAllNode(TreeNode<Integer> root){
+		if(root==null){
+			return 0;
+		}
+		int count = root.data;
+		for(int i=0;i<root.children.size();i++){
+			int childDataSum = sumOfAllNode(root.children.get(i));
+			count = count + childDataSum;
+		}
+		return count;
+	}
 	public static void main(String[] args) {
 		TreeNode<Integer> root = new TreeNode<>(4);
 		TreeNode<Integer> node1 = new TreeNode<>(2);
@@ -65,6 +88,9 @@ public class TreeTest {
 		node2.children.add(node4);
 		node2.children.add(node5);
 		printLevelWise(root);
+		System.out.println();
+		System.out.println(numberOfNode(root));
+		
 //		PrintTree(root);
 //		PrintTreeImproved(root);
 	}
