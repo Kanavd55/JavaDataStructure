@@ -1,7 +1,21 @@
-package trees;
-import java.util.*;
-public class TakeTreeInputLevelWise {
-	
+//Problem statement
+//Given a generic tree, find and return the height of given tree. The height of a tree is defined as the longest distance from root node to any of the leaf node. Assume the height of a tree with a single node is 1.
+//
+//Detailed explanation ( Input/output format, Notes, Images )
+//Constraints:
+//Time Limit: 1 sec
+//Sample Input 1:
+//10 3 20 30 40 2 40 50 0 0 0 0 
+//Sample Output 1:
+//3
+
+package Trees;
+
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+
+public class HeightOfGenericTree {
 	public static TreeNode<Integer> TakeTreeInputLevelWise(){
 		Scanner s = new Scanner(System.in);
 		Queue<TreeNode<Integer>> queue = new LinkedList<>();
@@ -28,32 +42,21 @@ public class TakeTreeInputLevelWise {
 		
 	}
 	
-	public static void printLevelWise(TreeNode<Integer> root){
+	public static int getHeight(TreeNode<Integer> root){
 		if(root==null) {
-			return;
+			return 0;
 		}
-		Queue<TreeNode<Integer>> queue = new LinkedList<>();
-		queue.add(root);
-		queue.add(null);
-		while(!queue.isEmpty()) {
-			TreeNode<Integer> node = queue.poll();
-			if(node!=null) {
-				System.out.print(node.data+" ");
-				for(int i=0;i<node.children.size();i++) {
-					queue.add(node.children.get(i));
-				}
-			}else if(node == null) {
-				if(queue.isEmpty()) {
-					break;
-				}else {
-					queue.add(null);
-					System.out.println();
-				}
+		int Height = 0;
+		for(int i=0;i<root.children.size();i++) {
+			int childHeight=getHeight(root.children.get(i));
+			if(childHeight>Height) {
+				Height=childHeight;
 			}
 		}
+		return Height+1;
 	}
 	public static void main(String[] args) {
 		TreeNode<Integer> rootNode = TakeTreeInputLevelWise();
-		printLevelWise(rootNode);
+		System.out.println(getHeight(rootNode));
 	}
 }

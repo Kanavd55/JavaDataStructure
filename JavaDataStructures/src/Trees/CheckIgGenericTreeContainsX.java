@@ -1,27 +1,40 @@
 //Problem statement
-//Given a tree and an integer x, find and return number of Nodes which are greater than x.
+//Given a generic tree and an integer x, check if x is present in the given tree or not. Return true if x is present, return false otherwise.
 //
-//Detailed explanation ( Input/output format, Notes, Images )
+//Input format :
+//
+//Line 1 : Integer x
+//
+//Line 2 : Elements in level order form separated by space (as per done in class). Order is -
+//
+//Root_data, n (No_Of_Child_Of_Root), n children, and so on for every element
+//
+//Output format : true or false
+//
 //Sample Input 1 :
-//35 10 3 20 30 40 2 40 50 0 0 0 0 
+//40
+//10 3 20 30 40 2 40 50 0 0 0 0 
+//
 //Sample Output 1 :
-//3
+//true
 //Explanation
-//Since x=35, the elements which are greater than 35 are 40, 40, 50, so the output for this is 3.
+//Since, 40 is present in the given tree, so the answer will be true.
 //Sample Input 2 :
-//10 10 3 20 30 40 2 40 50 0 0 0 0 
+//4
+//10 3 20 30 40 2 40 50 0 0 0 0 
+//
 //Sample Output 2:
-//5
+//false
 //Explanation
-//Since x=10, the elements which are greater than 10 are 20, 30, 40,  40, 50, so the output for this is 5.
+//Since, 4 is not present in the given tree, so the answer is false.
 
-package trees;
+package Trees;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class NumberOfNodesGreaterThanX {
+public class CheckIgGenericTreeContainsX {
 	public static TreeNode<Integer> TakeTreeInputLevelWise(){
 		Scanner s = new Scanner(System.in);
 		Queue<TreeNode<Integer>> queue = new LinkedList<>();
@@ -47,26 +60,26 @@ public class NumberOfNodesGreaterThanX {
 		return rootNode;
 		
 	}
-	
-	public static int numNodeGreater(TreeNode<Integer> root,int x){
+	public static boolean checkIfContainsX(TreeNode<Integer> root, int x){
+		// Write your code here
 		if(root==null) {
-			return 0;
+			return false;
 		}
-		int count = 0;
-		if(root.data>x) {
-			count=count+1;
+		if(root.data==x) {
+			return true;
 		}
 		for(int i=0;i<root.children.size();i++) {
-			int childCount = numNodeGreater(root.children.get(i),x);
-			count = count + childCount;
+			boolean isChildPresent = checkIfContainsX(root.children.get(i),x);
+			if(isChildPresent) {
+				return true;
+			}
 		}
-		return count;
-
+		return false;
 	}
 	public static void main(String[] args) {
-		Scanner s =  new Scanner(System.in);
+		Scanner s = new Scanner(System.in);
 		int x = s.nextInt();
 		TreeNode<Integer> rootNode = TakeTreeInputLevelWise();
-		System.out.println(numNodeGreater(rootNode,x));
+		System.out.println(checkIfContainsX(rootNode,x));
 	}
 }

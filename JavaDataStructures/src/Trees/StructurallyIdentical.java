@@ -17,7 +17,7 @@
 //Sample Output 2:
 //false
 
-package trees;
+package Trees;
 
 import java.util.LinkedList;
 import java.util.Queue;

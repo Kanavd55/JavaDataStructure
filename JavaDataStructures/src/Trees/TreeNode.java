@@ -1,4 +1,4 @@
-package trees;
+package Trees;
 import java.util.ArrayList;
 public class TreeNode<T> {
 	T data;

@@ -1,29 +1,7 @@
-//Problem statement
-//Given a generic tree, print the post-order traversal of given tree.
-//
-//The post-order traversal is: visit child nodes first and then root node.
-//
-//
-//For the given tree, the post order traversal will be 40 50 20 30 40 10
-//Detailed explanation ( Input/output format, Notes, Images )
-//Constraints:
-//Time Limit: 1 sec
-//Sample Input 1:
-//10 3 20 30 40 2 400 50 0 0 0 0 
-//Sample Output 1:
-//400 50 20 30 40 10
-//Explanation
-//For 10 , total 3 children are there : 20 30 40
-//For  20, total 2 children are there : 400 50
-//So, the output will be 400 50 20 30 40 10
-
-package trees;
-
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.Scanner;
-
-public class PostOrderTraversal {
+package Trees;
+import java.util.*;
+public class TakeTreeInputLevelWise {
+	
 	public static TreeNode<Integer> TakeTreeInputLevelWise(){
 		Scanner s = new Scanner(System.in);
 		Queue<TreeNode<Integer>> queue = new LinkedList<>();
@@ -49,17 +27,33 @@ public class PostOrderTraversal {
 		return rootNode;
 		
 	}
-	public static void printPostOrder(TreeNode<Integer> root){
+	
+	public static void printLevelWise(TreeNode<Integer> root){
 		if(root==null) {
 			return;
 		}
-		for(int i =0;i<root.children.size();i++) {
-			printPostOrder(root.children.get(i));
+		Queue<TreeNode<Integer>> queue = new LinkedList<>();
+		queue.add(root);
+		queue.add(null);
+		while(!queue.isEmpty()) {
+			TreeNode<Integer> node = queue.poll();
+			if(node!=null) {
+				System.out.print(node.data+" ");
+				for(int i=0;i<node.children.size();i++) {
+					queue.add(node.children.get(i));
+				}
+			}else if(node == null) {
+				if(queue.isEmpty()) {
+					break;
+				}else {
+					queue.add(null);
+					System.out.println();
+				}
+			}
 		}
-		System.out.print(root.data+" ");
 	}
 	public static void main(String[] args) {
 		TreeNode<Integer> rootNode = TakeTreeInputLevelWise();
-		printPostOrder(rootNode);
+		printLevelWise(rootNode);
 	}
 }

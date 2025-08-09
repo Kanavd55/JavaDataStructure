@@ -19,7 +19,7 @@
 //Explanation
 //Sum of node 1 and it's child (15) is maximum among all the nodes, so the output for this is 1.
 
-package trees;
+package Trees;
 
 import java.util.LinkedList;
 import java.util.Queue;

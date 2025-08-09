@@ -10,7 +10,7 @@
 //4
 
 
-package trees;
+package Trees;
 
 import java.util.LinkedList;
 import java.util.Queue;

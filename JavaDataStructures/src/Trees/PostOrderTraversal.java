@@ -1,21 +1,29 @@
 //Problem statement
-//Given a generic tree, find and return the height of given tree. The height of a tree is defined as the longest distance from root node to any of the leaf node. Assume the height of a tree with a single node is 1.
+//Given a generic tree, print the post-order traversal of given tree.
 //
+//The post-order traversal is: visit child nodes first and then root node.
+//
+//
+//For the given tree, the post order traversal will be 40 50 20 30 40 10
 //Detailed explanation ( Input/output format, Notes, Images )
 //Constraints:
 //Time Limit: 1 sec
 //Sample Input 1:
-//10 3 20 30 40 2 40 50 0 0 0 0 
+//10 3 20 30 40 2 400 50 0 0 0 0 
 //Sample Output 1:
-//3
+//400 50 20 30 40 10
+//Explanation
+//For 10 , total 3 children are there : 20 30 40
+//For  20, total 2 children are there : 400 50
+//So, the output will be 400 50 20 30 40 10
 
-package trees;
+package Trees;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
-public class HeightOfGenericTree {
+public class PostOrderTraversal {
 	public static TreeNode<Integer> TakeTreeInputLevelWise(){
 		Scanner s = new Scanner(System.in);
 		Queue<TreeNode<Integer>> queue = new LinkedList<>();
@@ -41,22 +49,17 @@ public class HeightOfGenericTree {
 		return rootNode;
 		
 	}
-	
-	public static int getHeight(TreeNode<Integer> root){
+	public static void printPostOrder(TreeNode<Integer> root){
 		if(root==null) {
-			return 0;
+			return;
 		}
-		int Height = 0;
-		for(int i=0;i<root.children.size();i++) {
-			int childHeight=getHeight(root.children.get(i));
-			if(childHeight>Height) {
-				Height=childHeight;
-			}
+		for(int i =0;i<root.children.size();i++) {
+			printPostOrder(root.children.get(i));
 		}
-		return Height+1;
+		System.out.print(root.data+" ");
 	}
 	public static void main(String[] args) {
 		TreeNode<Integer> rootNode = TakeTreeInputLevelWise();
-		System.out.println(getHeight(rootNode));
+		printPostOrder(rootNode);
 	}
 }
