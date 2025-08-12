@@ -10,5 +10,7 @@ public class HashMapsUse {
 		}else {
 			System.out.println("map has def");
 		}
+		int k = map.get("abc");
+		System.out.println(k);
 	}
 }
