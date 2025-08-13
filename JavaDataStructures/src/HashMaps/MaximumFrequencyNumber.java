@@ -5,7 +5,7 @@ import java.util.HashMap;
 public class MaximumFrequencyNumber {
 	public static int maxFrequencyNumber(int[] arr){ 
 		int output = -1;
-		HashMap<Integer,Integer> list = new HashMap<Integer,Integer>();
+		HashMap<Integer,Integer> list = new HashMap<>();
 		for(int i=0;i<arr.length;i++) {
 			if(list.containsKey(arr[i])) {
 				int value = list.get(arr[i])+1;
@@ -15,10 +15,10 @@ public class MaximumFrequencyNumber {
 			}
 		}
 		int maxCount = Integer.MIN_VALUE;
-		for(Integer key : list.keySet()) {
-			if(list.get(key)>maxCount) {
-				maxCount = list.get(key);
-				output = key;
+		for(int i =0;i<arr.length;i++) {
+			if(list.get(arr[i])>maxCount) {
+				maxCount = list.get(arr[i]);
+				output = arr[i];
 			}
 		}
 		return output;
