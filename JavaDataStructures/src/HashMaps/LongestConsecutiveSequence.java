@@ -30,13 +30,61 @@
 //Explanation:The longest consecutive sequence here is [15,16]. So the output is [15,16].
 
 package HashMaps;
-
+import java.util.HashMap;
 import java.util.Scanner;
 import java.util.ArrayList;
 public class LongestConsecutiveSequence {
 	public static ArrayList<Integer> longestConsecutiveIncreasingSequence(int[] arr) {
-		
+		HashMap<Integer,Boolean> map = new HashMap<>();
+		HashMap<Integer,Boolean> vis = new HashMap<>();
+		for(int i =0;i<arr.length;i++) {
+			map.put(arr[i], true);
+		}
+		int maxLength = Integer.MIN_VALUE;
+		int start = 0;
+		int end = 0;
+		for(int i=0;i<arr.length;i++) {
+			vis.put(arr[i],true);
+			if(!map.get(arr[i])) {
+				continue;
+			}
+			int element = arr[i];
+			int tempStart = arr[i];
+			int tempEnd = arr[i];
+			int tempLength = 1;
+			map.put(element, false);
+			while(map.containsKey(element+1)) {
+				tempLength++;
+				tempEnd = element+1;
+				map.put(element+1, false);
+				element = element+1;
+			}
+			element = arr[i];
+			while(map.containsKey(element-1)) {
+				tempLength++;
+				tempStart = element-1;
+				map.put(element-1, false);
+				element = element-1;
+			}
+			if(tempLength == maxLength){
+				if(vis.containsKey(tempStart) && vis.get(tempStart)){
+					maxLength = tempLength;
+				start=tempStart;
+				end = tempEnd;
+				}
+			}
+			if(tempLength>maxLength) {
+				maxLength = tempLength;
+				start=tempStart;
+				end = tempEnd;
+			}
+		}
+		ArrayList<Integer> output = new ArrayList<>();
+		output.add(start);
+		output.add(end);
+		return output;
     }
+
 	
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
