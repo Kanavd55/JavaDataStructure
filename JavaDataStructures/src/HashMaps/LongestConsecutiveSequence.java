@@ -84,6 +84,12 @@ public class LongestConsecutiveSequence {
 		output.add(end);
 		return output;
     }
+	
+	public static void PrintList(ArrayList<Integer> list) {
+		for(int i = 0;i<list.size();i++) {
+			System.out.println(list.get(i));
+		}
+	}
 
 	
 	public static void main(String[] args) {
@@ -91,5 +97,6 @@ public class LongestConsecutiveSequence {
 		int n = s.nextInt();
 		int [] arr = new int[n];
 		ArrayList<Integer> list = longestConsecutiveIncreasingSequence(arr);
+		PrintList(list);
 	}
 }
