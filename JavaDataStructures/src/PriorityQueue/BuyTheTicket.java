@@ -39,7 +39,9 @@ import java.util.Queue;
 import java.util.PriorityQueue;
 import java.util.LinkedList;
 import java.util.Collections;
+
 public class BuyTheTicket {
+	
 	public static int buyTicket(int input[], int k) {
 		PriorityQueue<Integer> maxHeap = new PriorityQueue<>(Collections.reverseOrder());
 		Queue<Integer> queue = new LinkedList<>();
@@ -66,8 +68,8 @@ public class BuyTheTicket {
 			}
 		}
 		return Time;
-
 	}
+	
 	public static void main(String[] args) {
 		Scanner s = new Scanner(System.in);
 		int n = s.nextInt();
