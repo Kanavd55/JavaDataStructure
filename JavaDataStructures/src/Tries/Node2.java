@@ -33,7 +33,15 @@ public class Node2 {
 		cntEndsWith--;
 	}
 	
-	void decreasePrefix() {
+	void reducePrefix() {
 		cntPrefix--;
+	}
+	
+	int getEnd() {
+		return cntEndsWith;
+	}
+	
+	int getPrefix() {
+		return cntPrefix;
 	}
 }
